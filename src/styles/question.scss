@@ -13,26 +13,52 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 24px;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+      }
+
+      span {
+        margin-left: 8px;
+        font-size: 14px;
+        color: #737380;
+      }
+    }
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      &.like-button {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        color: #737380;
+        transition: filter 0.2s;
+
+        &:hover {
+          filter: brightness(0.8);
+        }
+
+        &.liked {
+          color: #835afd;
+
+          svg path {
+            stroke: #835afd;
+          }
+        }
+      }
+    }
   }
 
   p {
     color: #29292e;
-  }
-
-  .user-info {
-    display: flex;
-    align-items: center;
-
-    img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-    }
-
-    span {
-      margin-left: 8px;
-      font-size: 14px;
-      color: #737380;
-    }
   }
 }
