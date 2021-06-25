@@ -8,6 +8,19 @@
     margin-top: 8px;
   }
 
+  &.hightlighted {
+    background-color: #f4f0ff;
+    border: 1px solid #835afd;
+
+    footer .user-info span {
+      color: #29292e;
+    }
+  }
+
+  &.answered {
+    background-color: #dbdcdd;
+  }
+
   footer {
     display: flex;
     justify-content: space-between;
@@ -36,16 +49,16 @@
       border: none;
       cursor: pointer;
 
+      &:hover {
+        filter: brightness(0.8);
+      }
+
       &.like-button {
         display: flex;
         align-items: flex-end;
         gap: 8px;
         color: #737380;
         transition: filter 0.2s;
-
-        &:hover {
-          filter: brightness(0.8);
-        }
 
         &.liked {
           color: #835afd;
@@ -55,6 +68,11 @@
           }
         }
       }
+    }
+
+    > div {
+      display: flex;
+      gap: 16px;
     }
   }
 

@@ -1,6 +1,8 @@
 import { useHistory, useParams } from 'react-router-dom';
 
 import '../styles/room.scss';
+import answerImg from '../assets/images/answer.svg';
+import checkImg from '../assets/images/check.svg';
 import deleteImg from '../assets/images/delete.svg';
 import logoImg from '../assets/images/logo.svg';
 import { Button } from '../components/Button';
@@ -18,6 +20,18 @@ export function AdminRoom() {
   const params = useParams<RoomParams>();
   const roomId = params.id;
   const { questions, title } = useRoom(roomId);
+
+  async function handleHighlightQuestion(questionId: string) {
+    await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+      isHighlighted: true
+    });
+  }
+
+  async function handleCheckQuestionAsAnswered(questionId: string) {
+    await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+      isAnswered: true
+    });
+  }
 
   async function handleDeleteQuestion(questionId: string) {
     if (window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
@@ -58,6 +72,25 @@ export function AdminRoom() {
           {questions.map(function (question) {
             return (
               <Question key={question.id} {...question}>
+                {!question.isAnswered && (
+                  <>
+                    <button
+                      onClick={() => handleCheckQuestionAsAnswered(question.id)}
+                    >
+                      <img
+                        alt="Marcar pergunta como respondida"
+                        src={checkImg}
+                      />
+                    </button>
+
+                    <button
+                      onClick={() => handleHighlightQuestion(question.id)}
+                    >
+                      <img alt="Dar destaque a pergunta" src={answerImg} />
+                    </button>
+                  </>
+                )}
+
                 <button onClick={() => handleDeleteQuestion(question.id)}>
                   <img alt="Remover pergunta" src={deleteImg} />
                 </button>
